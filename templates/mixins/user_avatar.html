@@ -1,0 +1,16 @@
+<!--user avatar sector-->
+{% if user.avatar %}
+    <div>
+        <div class="mx-auto h-50 w-50 overflow-hidden">
+            <img class="p-2 rounded-circle h-100 w-100 d-flex justify-content-center" src="{{user.avatar.url}}"/>
+        </div>
+        <p class="text-center font-weight-bold mt-3 overflow-hidden">{{user.username}}</p>
+    </div>
+{% else %}
+    <div>
+        <div class="mx-auto h-50 w-50 overflow-hidden rounded-circle">
+            <img class="p-2 h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
+        </div>
+        <p class="text-center font-weight-bold mt-3 overflow-hidden">{{user.username}}</p>
+    </div>
+{% endif %}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -17,25 +18,25 @@
 
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
   <!-- progress barstle -->
-  <link rel="stylesheet" href="/static/css/css-circular-prog-bar.css">
+  <link rel="stylesheet" href="{% static 'css/css-circular-prog-bar.css' %}">
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
   <!-- font wesome stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <!-- Custom styles for this template -->
-  <link href="/static/css/style.css" rel="stylesheet" />
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="/static/css/responsive.css" rel="stylesheet" />
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 
-  <link href="/static/css/custom.css" rel="stylesheet" />
-
-
+  <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
 
 
 
-  <link rel="stylesheet" href="/static/css/css-circular-prog-bar.css">
+
+
+  <link rel="stylesheet" href="{% static 'css/css-circular-prog-bar.css' %}">
 
 
 </head>
@@ -44,7 +45,7 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href={% url 'core:home' %}>
-            <img src="/static/images/logo.png" alt="">
+            <img src="{% static 'images/logo.png' %}" alt="">
               <span class="text-dark">
                 Songdo Forest
               </span>
@@ -120,8 +121,8 @@
   </section>
   <!-- footer section -->
 
-  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 
   <script>
     // This example adds a marker to indicate the position of Bondi Beach in Sydney,

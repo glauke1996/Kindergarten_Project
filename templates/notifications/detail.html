@@ -2,20 +2,17 @@
 
 <body>
 {% block content %}
+<main class="bg-white">
     <div class="row">
         <div class="col-md-8 mx-auto mt-5">
             <div class="contact-form">
                 <div class="row">
-                    <h1 class="d-flex justify-content-center pt-3 col-md-9">
-                        {{post.title}}
-                    </h1>
+                    <div class="pt-3 col-md-9">
+                        <h1>{{post.title}}</h1>
+                        <p class="mt-4">작성일 : {{post.created}}</p>
+                    </div>
                     <div class="col-md-3">
-                        <div class="pt-2">
-                            <div class="mx-auto h-50 w-50 overflow-hidden rounded-circle">
-                                <img class="h-100 w-100 d-flex justify-content-center" src="{{post.user.avatar.url}}"/>
-                            </div>
-                            <p class="text-center mt-3">{{post.user.username}}</p>
-                        </div>
+                        {% include "mixins/user_avatar.html" with user=post.user %}
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -25,13 +22,21 @@
                 </div>
             </div>
             <!--Review sector-->
-            <div>
-                <h4>Review</h4>
+            <div class="container rounded-lg min-vh-100">
+                <h4>Comment</h4>
                 {% for review in post.reviews.all %}
-                    {{review.review}}-{{review.user}}
+                    <div class="row my-3">
+                        <div class="col-md-3">
+                            {% include "mixins/user_avatar.html" with user=review.user %}
+                        </div>
+                        <div class="col-md-9 text-justify">
+                            {{review.review}}-{{review.user}}
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+</main>
 {% endblock %}
 </body>
