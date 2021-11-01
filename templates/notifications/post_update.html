@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+<body>
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 mx-auto mt-5">
+            <div class="contact-form">
+                <div class="row">
+                    <div class="Customized-Container3 col-md-1">
+                        제목
+                    </div>
+                    <div class="Title-Container pt-2 col-md-11">
+                        {{post.title}}
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="Customized-Container3 col-md-1">
+                        내용
+                    </div>
+                    <div class="Content-Container pt-2 col-md-11">
+                        {{post.content}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>

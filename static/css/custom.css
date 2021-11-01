@@ -1,0 +1,46 @@
+.fit-cover{
+    object-fit: cover !important ; 
+}
+._action{
+    position:fixed;
+    border: solid 2px black;
+    width: 200px;
+    height: 200px;
+}
+._profile{
+    height: 10em; /* height == width */
+	width: 10em;
+	border: 2px solid #666;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.Title-Container {
+    background: rgba(250, 230, 230, 0.932);
+    width:auto;
+    border: solid 2px black;
+    border-radius: 20px;
+    
+}
+.Content-Container{
+    background: rgba(250, 230, 230, 0.932);
+    width:auto;
+    border: solid 2px black;
+    border-radius: 20px;
+    min-height: 60vh;
+}
+.Detail-Container{
+    width:auto;
+    border-top: solid 3px rgba(229, 175, 175, 0.932) ;
+    border-bottom: solid 3px rgba(229, 175, 175, 0.932) ;
+    min-height: 80vh;
+}
+.Customized-Container3 {
+    padding: 10px;
+    
+}
+.Happy_Flex{
+    flex-direction: row;
+}
+.justify-center{
+    justify-content: space-between;
+}
