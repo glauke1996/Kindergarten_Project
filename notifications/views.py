@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import Http404
 from . import models as noti_model
+from reviews import forms
 
 # Create your views here.
 
@@ -22,6 +23,9 @@ class BoardView(ListView):
 def post_detail(request, pk):
     try:
         post = noti_model.Posting.objects.get(pk=pk)
-        return render(request, "notifications/detail.html", {"post": post})
+        form = forms.CreateReviewForm()
+        return render(
+            request, "notifications/detail.html", {"post": post, "form": form}
+        )
     except noti_model.Posting.DoesNotExist:
         return Http404

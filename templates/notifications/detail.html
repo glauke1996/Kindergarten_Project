@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="pt-3 col-md-9">
                         <h1>{{post.title}}</h1>
-                        <p class="mt-4">작성일 : {{post.created}}</p>
+                        <p class="mt-4">작성일 : {{post.created|date:"Y. m. j | P"}}</p>
                     </div>
                     <div class="col-md-3">
                         {% include "mixins/user_avatar.html" with user=post.user %}
@@ -17,20 +17,45 @@
                 </div>
                 <div class="row mt-3">
                     <div class="Detail-Container pt-4 col-md-12">
-                        {{post.content}}
+                        <p class="lead">{{post.content}}</p>
                     </div>
                 </div>
             </div>
             <!--Review sector-->
             <div class="container rounded-lg min-vh-100">
-                <h4>Comment</h4>
+                <h4>댓글    {{post.reviews.all.count}}개</h4>
+                <form action="{% url 'reviews:create' post.pk %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mx-auto">{{form.as_p}}</div>
+                    <button class="call_to-btn"><span class="main-heading">댓글</span></button>
+                </form>
                 {% for review in post.reviews.all %}
-                    <div class="row my-3">
+                    <div class="row my-5">
                         <div class="col-md-3">
-                            {% include "mixins/user_avatar.html" with user=review.user %}
+                            {% if review.user.avatar %}
+                                <div>
+                                    <div class="mx-auto h-50 w-50 overflow-hidden">
+                                        <img class="p-3 rounded-circle h-100 w-100 d-flex justify-content-center" src="{{review.user.avatar.url}}"/>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <div class="mx-auto h-50 w-50 overflow-hidden rounded-circle">
+                                        <img class="p-3 h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="col-md-9 text-justify">
-                            {{review.review}}-{{review.user}}
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-auto">
+                                    <p class="font-weight-bold overflow-hidden">{{review.user.username}}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p>{{post.created|date:"Y. m. j"}}</p>
+                                </div>
+                            </div>
+                            <p class="pb-2 lead">{{review.review}}-{{review.user}}</p>
                         </div>
                     </div>
                 {% endfor %}
