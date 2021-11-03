@@ -42,7 +42,7 @@
 </head>
 <body>
     <header class="header_section border-bottom bg-light">
-      <div class="container">
+      <div class="px-5">
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href={% url 'core:home' %}>
             <img src="{% static 'images/logo.png' %}" alt="">
@@ -57,7 +57,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-              <ul class="navbar-nav px-2">
+              <ul class="navbar-nav px-2 mr-5">
                 <li class="nav-item border-button px-2 active">
                   <a class="nav-link" href="{% url 'core:home' %}"> 홈 <span class="sr-only">(current)</span></a>
                 </li>
@@ -82,11 +82,14 @@
 
 
               </ul>
-              <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+              <!--<form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
-              </form>
+              </form>-->
             </div>
           </div>
+              <div class="nav-item text-black-50">
+                <a class="nav-link" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
+              </div>
         </nav>
       </div>
     </header>

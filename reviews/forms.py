@@ -1,5 +1,6 @@
 from django import forms
 from django.db.models import fields
+from django.forms import widgets
 from . import models
 
 
@@ -9,6 +10,11 @@ class CreateReviewForm(forms.ModelForm):
         fields = ("review",)
         labels = {
             "review": "",
+        }
+        widgets = {
+            "review": forms.Textarea(
+                attrs={"class": "form-control Jin-box", "rows": "5"}
+            )
         }
 
     def save(self):

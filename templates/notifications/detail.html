@@ -23,14 +23,35 @@
             </div>
             <!--Review sector-->
             <div class="container rounded-lg min-vh-100">
-                <h4>댓글    {{post.reviews.all.count}}개</h4>
-                <form action="{% url 'reviews:create' post.pk %}" method="POST">
-                    {% csrf_token %}
-                    <div class="mx-auto">{{form.as_p}}</div>
-                    <button class="call_to-btn"><span class="main-heading">댓글</span></button>
-                </form>
+                <div class="pt-2 pb-5">
+                    <h4>댓글    {{post.reviews.all.count}}개</h4>
+                    <!--Comment Form-->
+                    <form class="mx-auto my-5" action="{% url 'reviews:create' post.pk %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3 my-auto">
+                                {% if review.user.avatar %}
+                                    <div>
+                                        <div class="mx-auto h-50 w-50 overflow-hidden">
+                                            <img class="p-3 rounded-circle h-100 w-100 d-flex justify-content-center" src="{{review.user.avatar.url}}"/>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <div class="mx-auto h-50 w-50 overflow-hidden rounded-circle">
+                                            <img class="p-3 h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-8">{{form}}</div>
+                            <button class="call_to-btn h-25 d-flex my-auto"><span class="main-heading">댓글</span></button>
+                        </div>
+                    </form>
+                </div>
                 {% for review in post.reviews.all %}
                     <div class="row my-5">
+                        <!--comment user profile-->
                         <div class="col-md-3">
                             {% if review.user.avatar %}
                                 <div>
@@ -46,6 +67,7 @@
                                 </div>
                             {% endif %}
                         </div>
+                        <!--comment letter box-->
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-auto">
