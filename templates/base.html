@@ -87,9 +87,18 @@
               </form>-->
             </div>
           </div>
-              <div class="nav-item text-black-50">
-                <a class="nav-link" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
-              </div>
+              {% if user.is_authenticated %}
+                <div class="nav-item text-black-50">
+                  <a class="nav-link" href="{% url 'users:logout' %}"><span class="main-heading">로그아웃</span></a>
+                </div>
+              {% else %}
+                <div class="nav-item text-black-50">
+                  <a class="nav-link" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
+                </div>
+                <div class="nav-item text-black-50">
+                  <a class="nav-link" href="{% url 'users:signup' %}"><span class="main-heading">회원가입</span></a>
+                </div>
+              {% endif %}
         </nav>
       </div>
     </header>

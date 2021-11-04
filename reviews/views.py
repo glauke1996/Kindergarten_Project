@@ -20,3 +20,4 @@ def create_review(request, pk):
             review.user = request.user
             review.save()
             messages.success(request, "답글이 등록되었습니다.")
+            return redirect(reverse("notifications:detail", kwargs={"pk": post.pk}))

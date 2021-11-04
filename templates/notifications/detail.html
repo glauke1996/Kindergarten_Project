@@ -30,10 +30,10 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-3 my-auto">
-                                {% if review.user.avatar %}
+                                {% if user.avatar %}
                                     <div>
                                         <div class="mx-auto h-50 w-50 overflow-hidden">
-                                            <img class="p-3 rounded-circle h-100 w-100 d-flex justify-content-center" src="{{review.user.avatar.url}}"/>
+                                            <img class="p-3 rounded-circle h-100 w-100 d-flex justify-content-center" src="{{user.avatar.url}}"/>
                                         </div>
                                     </div>
                                 {% else %}
@@ -77,7 +77,7 @@
                                     <p>{{post.created|date:"Y. m. j"}}</p>
                                 </div>
                             </div>
-                            <p class="pb-2 lead">{{review.review}}-{{review.user}}</p>
+                            <p class="pb-2 lead">{{review.review}}</p>
                         </div>
                     </div>
                 {% endfor %}

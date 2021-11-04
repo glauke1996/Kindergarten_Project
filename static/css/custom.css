@@ -35,8 +35,8 @@
 }
 .Detail-Container{
     width:auto;
-    border-top: solid 3px rgba(255, 242, 170, 0.932) ;
-    border-bottom: solid 3px rgba(255, 242, 170, 0.932) ;
+    border-top: solid 3px rgba(0, 0, 0, 0.932) ;
+    border-bottom: solid 3px rgba(0, 0, 0, 0.932) ;
     min-height: 80vh;
 }
 .Customized-Container3 {
@@ -51,7 +51,7 @@
 }
 .call_to-btn2 {
     display: inline-block;
-    padding: 12px 20px;
+    padding: 8px 16px;
     border-radius: 10px;
     font-size: 15px;
     text-transform: uppercase;
@@ -64,7 +64,7 @@
     padding: 15px 35px;
 }
 .call_to-btn2 img {
-    width: 18px;
+    width: 15px;
     margin-left: 10px;
 }
 .call_to-btn2:hover,
