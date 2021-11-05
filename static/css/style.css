@@ -32,6 +32,10 @@ body {
 .text-dark{
   color: #232323;
 }
+.text-dark:hover {
+  border-bottom-color:#232323;
+  cursor: pointer;
+}
 .layout_padding {
   padding: 75px 0;
 }

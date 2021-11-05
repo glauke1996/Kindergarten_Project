@@ -39,6 +39,15 @@
     border-bottom: solid 3px rgba(0, 0, 0, 0.932) ;
     min-height: 80vh;
 }
+.List-Container{
+    width:auto;
+    border-top: solid 3px rgba(0, 0, 0, 0.932) ;
+    border-bottom: solid 3px rgba(0, 0, 0, 0.932) ;
+    min-height: auto;
+}
+.Custom-mar {
+    margin-top: 7rem ;
+}
 .Customized-Container3 {
     padding: 10px;
     
@@ -78,13 +87,24 @@
 }
 
 .takasa{
+    height: 6rem;
+}
+.nagasa{
+    width: 6rem;
+}
+.takasa2{
+    height: 7rem;
+}
+.nagasa2{
+    height: 7rem;
+}
+.takasa3{
+    max-height: 28rem;
+}
+.nagasa3{
+    max-width: 28rem;
+}
+.takasa10{
     height: 60px;
 }
 
-.takasa2{
-    height:20px;
-}
-
-.nagasa{
-    width: 20px;
-}

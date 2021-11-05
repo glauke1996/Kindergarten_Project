@@ -3,24 +3,35 @@
 
 {% block content %}
 
-    {% for posting in object_list  %}
-      <a href="{% url 'notifications:detail' posting.pk %}">
-        <h3>{{posting.title}} -{{posting.created}}</h3>
-    {% endfor %}
-    <h5>
+    <div class="List-Container mx-auto w-75 Custom-mar">
+        <div class="container mx-auto py-4">
+            {% for posting in object_list  %}
+            <a href="{% url 'notifications:detail' posting.pk %}" class="row">
+                <h4 class="text-truncate col-md-10 text-dark">{{posting.title}}</h4> <span class="col-md-2 text-black-50 text-truncate">{{posting.created|date:"Y. m. j | P"}}</span></a>
+            {% endfor %}
+        </div>
+    </div>
 
-    {% if page_obj.has_previous %}
-        <a href="?page={{page_obj.previous_page_number}}">Previous</a>
-    {% endif %}
+    <div class="text-center mt-5">
+        <h5>
+        {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}" class="call_to-btn2 text-dark">Previous</a>
+        {% endif %}
 
-    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+        {{page_obj.number}} of {{page_obj.paginator.num_pages}}
 
-    {% if page_obj.has_next  %}
-        <a href="?page={{page_obj.next_page_number}}">Next</a>
-    {% endif %}
+        {% if page_obj.has_next  %}
+            <a href="?page={{page_obj.next_page_number}}" class="call_to-btn2 text-dark">Next</a>
+        {% endif %}
 
 
-    </h5>
+        </h5>
+    </div>
+
+    <form method="GET" action="../notifications" class="mx-auto text-center">
+        <input value="{{keyword}}" placeholder="키워드로 검색">
+        <button class="call_to-btn2 text-black-50">검색</button>
+    </form>
 
 
 {% endblock content %}

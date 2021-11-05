@@ -9,10 +9,13 @@ from core.models import AbstractTimeStampedModel
 class Posting(AbstractTimeStampedModel):
     title = models.CharField(max_length=80)
     content = models.TextField()
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to="pictures", null=True, blank=True)
     user = models.ForeignKey(
         "users.User", related_name="posting", on_delete=models.CASCADE
     )
+
+    class Meta:
+        ordering = ("-created",)
 
     def __str__(self):
         return self.title
