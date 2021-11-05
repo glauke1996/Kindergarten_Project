@@ -21,7 +21,7 @@ body {
 
 .border-button {
   border-bottom: solid 3px #f8f9fa;
-  height: 50px;
+  height: 55px;
   margin-bottom: -10px;
   transition: border-bottom 0.8s linear;
 }
