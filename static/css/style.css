@@ -6,36 +6,26 @@ body {
   background-image: url(../images/kindergarten-bg.jpg);
 }
 
-.Jin-box {
-  transition: box-shadow .3s;
-  border-radius:10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  float: left;
-  
-}
 .box:hover {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
 
-.border-button {
-  border-bottom: solid 3px #f8f9fa;
-  height: 55px;
-  margin-bottom: -10px;
-  transition: border-bottom 0.8s linear;
-}
 
-.border-button:hover { border-bottom-color: #FC5185 ; }
 
 
 .text-dark{
-  color: #232323;
+  color: black;
+  border-bottom: solid 2px white;
+  text-decoration: none;
 }
+
 .text-dark:hover {
-  border-bottom-color:#232323;
-  cursor: pointer;
+  border-bottom-color: #232323;
+  display: inline-block;
+  height: 0.95em;
 }
+
 .layout_padding {
   padding: 75px 0;
 }
@@ -479,6 +469,9 @@ a:focus {
 
 .footer_section a {
   color: #fdfdfe;
+}
+.text-color-black{
+  color: black;
 }
 
 /* end footer section*/

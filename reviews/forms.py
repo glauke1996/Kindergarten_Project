@@ -13,7 +13,7 @@ class CreateReviewForm(forms.ModelForm):
         }
         widgets = {
             "review": forms.Textarea(
-                attrs={"class": "form-control Jin-box", "rows": "5"}
+                attrs={"class": "form-control kagenoaru-box", "rows": "5"}
             )
         }
 

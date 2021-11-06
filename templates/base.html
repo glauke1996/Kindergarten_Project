@@ -46,7 +46,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container">
           <a class="navbar-brand" href={% url 'core:home' %}>
             <img src="{% static 'images/logo.png' %}" alt="">
-              <span class="text-dark">
+              <span class="text-black-50">
                 Songdo Forest
               </span>
           </a>
@@ -89,11 +89,11 @@
           </div>
               {% if user.is_authenticated %}
                 <div class="nav-item text-black-50">
-                  <a class="nav-link" href="{% url 'users:logout' %}"><span class="main-heading">로그아웃</span></a>
+                  <a class="nav-link call_to-btn2" href="{% url 'users:logout' %}"><span class="main-heading">로그아웃</span></a>
                 </div>
               {% else %}
                 <div class="nav-item text-black-50">
-                  <a class="nav-link" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
+                  <a class="nav-link call_to-btn2" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
                 </div>
                 <div class="nav-item text-black-50">
                   <a class="nav-link" href="{% url 'users:signup' %}"><span class="main-heading">회원가입</span></a> 

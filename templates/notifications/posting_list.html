@@ -6,8 +6,12 @@
     <div class="List-Container mx-auto w-75 Custom-mar">
         <div class="container mx-auto py-4">
             {% for posting in object_list  %}
-            <a href="{% url 'notifications:detail' posting.pk %}" class="row">
-                <h4 class="text-truncate col-md-10 text-dark">{{posting.title}}</h4> <span class="col-md-2 text-black-50 text-truncate">{{posting.created|date:"Y. m. j | P"}}</span></a>
+            <div class="row justify-content-between">
+                <a href="{% url 'notifications:detail' posting.pk %}" >
+                    <h4 class="text-truncate text-dark">{{posting.title}}</h4> 
+                </a>
+                <div class="text-black-50 text-truncate"><span class="mr-2">{{posting.user.username}}</span>|<span class="ml-2">{{posting.created|date:"P"}}</span></div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -15,22 +19,22 @@
     <div class="text-center mt-5">
         <h5>
         {% if page_obj.has_previous %}
-            <a href="?page={{page_obj.previous_page_number}}" class="call_to-btn2 text-dark">Previous</a>
+            <a href="?page={{page_obj.previous_page_number}}" class="call_to-btn2 text-black-50">Previous</a>
         {% endif %}
 
         {{page_obj.number}} of {{page_obj.paginator.num_pages}}
 
         {% if page_obj.has_next  %}
-            <a href="?page={{page_obj.next_page_number}}" class="call_to-btn2 text-dark">Next</a>
+            <a href="?page={{page_obj.next_page_number}}" class="call_to-btn2 text-black-50">Next</a>
         {% endif %}
 
 
         </h5>
     </div>
 
-    <form method="GET" action="../notifications" class="mx-auto text-center">
-        <input value="{{keyword}}" placeholder="키워드로 검색">
-        <button class="call_to-btn2 text-black-50">검색</button>
+    <form method="GET" action="../notifications" class="mx-auto w-25 d-flex justify-content-center mt-5">
+        <input value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
+        <button class="call_to-btn2 text-black-50 ml-2">검색</button>
     </form>
 
 

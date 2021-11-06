@@ -2,10 +2,8 @@
     object-fit: cover !important ; 
 }
 
-.no-border {
-    border: 0;
-    box-shadow: none; /* You may want to include this as bootstrap applies these styles too */
-}
+
+
 ._action{
     position:fixed;
     border: solid 2px black;
@@ -43,7 +41,7 @@
     width:auto;
     border-top: solid 3px rgba(0, 0, 0, 0.932) ;
     border-bottom: solid 3px rgba(0, 0, 0, 0.932) ;
-    min-height: auto;
+    min-height: 50vh;
 }
 .Custom-mar {
     margin-top: 7rem ;
@@ -52,12 +50,63 @@
     padding: 10px;
     
 }
-.Happy_Flex{
-    flex-direction: row;
+
+.call_to-btn3 {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    text-transform: uppercase;
+    background-color: #ffc40063;
+    border: 1px solid transparent;
+    transition: all 0.3s ease 0s;
 }
-.justify-center{
-    justify-content: space-between;
+.hero_section .call_to-btn3 {
+    padding: 15px 35px;
 }
+.call_to-btn3 img {
+    width: 15px;
+    margin-left: 10px;
+}
+.call_to-btn3:hover,
+.btn_on-hover:hover {
+    color: #fff;
+    -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.7);
+    color: #fff;
+    transform: translateY(-7px);
+}
+.takasa{
+    height: 6rem;
+}
+.nagasa{
+    width: 6rem;
+}
+.takasa2{
+    height: 8rem;
+}
+.nagasa2{
+    width: 8rem;
+}
+.takasa3{
+    max-height: 28rem;
+}
+.nagasa3{
+    max-width: 28rem;
+}
+.takasa10{
+    height: 60px;
+}
+.border-button {
+    border-bottom: solid 3px #f8f9fa;
+    height: 55px;
+    margin-bottom: -10px;
+    transition: border-bottom 0.8s linear;
+  }
+  
+.border-button:hover { border-bottom-color: #FC5185 ; }
+
 .call_to-btn2 {
     display: inline-block;
     padding: 8px 16px;
@@ -85,26 +134,23 @@
   color: #fff;
   transform: translateY(-7px);
 }
-
-.takasa{
-    height: 6rem;
+.kagenoaru-box {
+    transition: box-shadow .3s;
+    border-radius:10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    float: left;
+    
+  }
+.kagenoaru-box:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
-.nagasa{
-    width: 6rem;
-}
-.takasa2{
-    height: 7rem;
-}
-.nagasa2{
-    height: 7rem;
-}
-.takasa3{
-    max-height: 28rem;
-}
-.nagasa3{
-    max-width: 28rem;
-}
-.takasa10{
-    height: 60px;
+.text-blur {
+    -webkit-transition: all .5s;
+    transition: all .5s;
 }
 
+.text-blur:hover {
+   color: transparent;
+   text-shadow: 0 0 2px rgba(0,0,0,0.7);
+}

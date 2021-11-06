@@ -32,7 +32,7 @@
                     <form class="mx-auto my-5" action="{% url 'reviews:create' post.pk %}" method="POST">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="col-md-3 my-auto">
+                            <div class="col-md-2 my-auto">
                                 {% if user.avatar %}
                                     <div>
                                         <div class="mx-auto takasa nagasa overflow-hidden">
@@ -55,7 +55,7 @@
                 {% for review in post.reviews.all %}
                     <div class="row my-5">
                         <!--comment user profile-->
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             {% if review.user.avatar %}
                                 <div>
                                     <div class="mx-auto takasa nagasa overflow-hidden">
