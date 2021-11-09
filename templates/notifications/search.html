@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="List-Container mx-auto w-75 Custom-mar">
+        <div class="container mx-auto pb-5 w-100">
+            <div class="row justify-content-between py-3 Custom-border-b mb-3">
+                <span class="col-md-8 text-center">제목</span>
+                <span class="text-center col-md-2">글쓴이</span><span class="col-md-2 text-center">작성일</span>
+            </div>
+            {% for result in results  %}
+                {{result.title}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+
+    <form method="GET" action="{% url 'notifications:search'%}" class="mx-auto w-25 d-flex justify-content-center mt-5">
+        <input name="keyword" value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
+        <button class="call_to-btn2 text-black-50 ml-2">검색</button>
+    </form>
+
+
+{% endblock content %}
+</body>

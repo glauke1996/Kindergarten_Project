@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView
 from django.http import Http404
 from . import models as noti_model
@@ -29,3 +30,17 @@ def post_detail(request, pk):
         )
     except noti_model.Posting.DoesNotExist:
         return Http404
+
+
+def search(request):
+    filter_args = {}
+    keyword = request.GET.get("keyword", "None")
+    print(keyword)
+    if keyword == "None":
+        results = noti_model.Posting.objects.all()
+    else:
+        filter_args["title__contains"] = keyword
+        results = noti_model.Posting.objects.filter(**filter_args)
+    return render(
+        request, "notifications/search.html", {"keyword": keyword, "results": results}
+    )

@@ -6,4 +6,5 @@ app_name = "notifications"
 urlpatterns = [
     path("", views.BoardView.as_view(), name="notifications"),
     path("<int:pk>", views.post_detail, name="detail"),
+    path("search/", views.search, name="search"),
 ]

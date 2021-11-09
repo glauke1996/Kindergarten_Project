@@ -2,15 +2,20 @@
 
 
 {% block content %}
-
     <div class="List-Container mx-auto w-75 Custom-mar">
-        <div class="container mx-auto py-4">
+        <div class="container mx-auto pb-5 w-100">
+            <div class="row justify-content-between py-3 Custom-border-b mb-3">
+                <span class="col-md-8 text-center">제목</span>
+                <span class="text-center col-md-2">글쓴이</span><span class="col-md-2 text-center">작성일</span>
+            </div>
             {% for posting in object_list  %}
             <div class="row justify-content-between">
-                <a href="{% url 'notifications:detail' posting.pk %}" >
-                    <h4 class="text-truncate text-dark">{{posting.title}}</h4> 
-                </a>
-                <div class="text-black-50 text-truncate"><span class="mr-2">{{posting.user.username}}</span>|<span class="ml-2">{{posting.created|date:"P"}}</span></div>
+                <div class="col-md-8">
+                    <a href="{% url 'notifications:detail' posting.pk %}" >
+                        <span class="text-truncate text-dark">{{posting.title}}</span> 
+                    </a>
+                </div>
+                <span class="col-md-2 text-black-50 text-truncate text-center">{{posting.user.username}}</span><span class="col-md-2 text-center text-truncate">{{posting.created|date:"P"}}</span>
             </div>
             {% endfor %}
         </div>
@@ -32,8 +37,8 @@
         </h5>
     </div>
 
-    <form method="GET" action="../notifications" class="mx-auto w-25 d-flex justify-content-center mt-5">
-        <input value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
+    <form method="GET" action="{% url 'notifications:search'%}" class="mx-auto w-25 d-flex justify-content-center mt-5">
+        <input name="keyword" value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
         <button class="call_to-btn2 text-black-50 ml-2">검색</button>
     </form>
 
