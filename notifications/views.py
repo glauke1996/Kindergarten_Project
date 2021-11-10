@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import ListView
 from django.http import Http404
+from django.core.paginator import Paginator
 from . import models as noti_model
 from reviews import forms
 
@@ -34,13 +35,19 @@ def post_detail(request, pk):
 
 def search(request):
     filter_args = {}
-    keyword = request.GET.get("keyword", "None")
+    keyword = request.GET.get("keyword")
     print(keyword)
-    if keyword == "None":
-        results = noti_model.Posting.objects.all()
-    else:
+    if keyword != None:
         filter_args["title__contains"] = keyword
         results = noti_model.Posting.objects.filter(**filter_args)
+
+    else:
+        results = noti_model.Posting.objects.all()
+    page = request.GET.get("page", 1)
+    paginator = Paginator(results, 10, orphans=5)
+    posts = paginator.page(int(page))
     return render(
-        request, "notifications/search.html", {"keyword": keyword, "results": results}
+        request,
+        "notifications/search.html",
+        {"page": posts, "keyword": keyword},
     )

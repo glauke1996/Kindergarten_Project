@@ -8,17 +8,40 @@
                 <span class="col-md-8 text-center">제목</span>
                 <span class="text-center col-md-2">글쓴이</span><span class="col-md-2 text-center">작성일</span>
             </div>
-            {% for result in results  %}
-                {{result.title}}
+            {% for result in page  %}
+            <div class="row justify-content-between">
+                <div class="col-md-8">
+                    <a href="{% url 'notifications:detail' result.pk %}" >
+                        <span class="text-truncate text-dark">{{result.title}}</span> 
+                    </a>
+                </div>
+                <span class="col-md-2 text-black-50 text-truncate text-center">{{result.user.username}}</span><span class="col-md-2 text-center text-truncate">{{result.created|date:"P"}}</span>
             </div>
+            
             {% endfor %}
         </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <h5>
+        {% if page.has_previous %}
+            <a href="?page={{page.previous_page_number}}" class="call_to-btn2 text-black-50">Previous</a>
+        {% endif %}
+
+        {{page.number}} of {{page.paginator.num_pages}}
+
+        {% if page.has_next  %}
+            <a href="?page={{page.next_page_number}}" class="call_to-btn2 text-black-50">Next</a>
+        {% endif %}
+
+
+        </h5>
     </div>
 
     
 
     <form method="GET" action="{% url 'notifications:search'%}" class="mx-auto w-25 d-flex justify-content-center mt-5">
-        <input name="keyword" value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
+        <input name="keyword" value="" placeholder="키워드로 검색" class="kagenoaru-box text-center">
         <button class="call_to-btn2 text-black-50 ml-2">검색</button>
     </form>
 
