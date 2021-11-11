@@ -7,9 +7,14 @@
         <div class="col-md-8 mx-auto mt-5">
             <div class="contact-form">
                 <div class="row">
-                    <div class="pt-3 col-md-9">
-                        <h1>{{post.title}}</h1>
-                        <p class="mt-4">작성일 : {{post.created|date:"Y. m. j | P"}}</p>
+                    <div class="my-auto col-md-9">
+                        <h1 class="post-title">{{post.title}}</h1>
+                        <p class="pt-1 text-truncate">작성일 : {{post.created|date:"Y. m. j | P"}}</p>
+                        {% if post.user == user %}
+                            <a href="{% url 'notifications:photos' post.pk %}">
+                                <span class="modification-btn">사진 편집</span>
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="col-md-3">
                         {% include "mixins/user_avatar.html" with user=post.user %}
@@ -18,9 +23,11 @@
                 <div class="row mt-3">
                     <div class="Detail-Container pt-4 col-md-12">
                         <p class="lead">{{post.content}}</p>
-                        {% if post.picture %}
-                            <img class="nagasa3 takasa3" src="{{post.picture.url}}"/>
-                        {% endif %}
+                        {% for photo in post.photos.all %}
+                            <div>
+                                <img class="nagasa3 takasa3" src="{{photo.file.url}}"/>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

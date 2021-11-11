@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.http import Http404
 from core.models import AbstractTimeStampedModel
 
 
@@ -9,7 +10,7 @@ from core.models import AbstractTimeStampedModel
 class Posting(AbstractTimeStampedModel):
     title = models.CharField(max_length=80)
     content = models.TextField()
-    picture = models.ImageField(upload_to="pictures", null=True, blank=True)
+    # picture = models.ImageField(upload_to="pictures", null=True, blank=True)
     user = models.ForeignKey(
         "users.User", related_name="posting", on_delete=models.CASCADE
     )
@@ -22,3 +23,12 @@ class Posting(AbstractTimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("notifications:detail", kwargs={"pk": self.pk})
+
+
+class Photo(AbstractTimeStampedModel):
+    caption = models.CharField(max_length=80)
+    file = models.ImageField(upload_to="post_photos")
+    post = models.ForeignKey("Posting", related_name="photos", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption

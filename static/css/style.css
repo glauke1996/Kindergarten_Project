@@ -146,6 +146,16 @@ a:focus {
   height: 95vh;
   position: relative;
 }
+.modification-btn{
+  color: rgb(27, 87, 105);
+  font-weight: 700;
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+}
+.modification-btn:hover{
+  color: rgb(0, 255, 221);
+}
+
 
 .top_container::before {
   content: "";

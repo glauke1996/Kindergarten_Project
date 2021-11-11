@@ -1,6 +1,7 @@
+from django.db.models import fields
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.http import Http404
 from django.core.paginator import Paginator
 from . import models as noti_model
@@ -44,10 +45,29 @@ def search(request):
     else:
         results = noti_model.Posting.objects.all()
     page = request.GET.get("page", 1)
-    paginator = Paginator(results, 10, orphans=5)
+    paginator = Paginator(results, 12, orphans=5)
     posts = paginator.page(int(page))
     return render(
         request,
         "notifications/search.html",
         {"page": posts, "keyword": keyword},
     )
+
+
+class PostPhotosView(DetailView):
+    model = noti_model.Posting
+    template_name = "notifications/post_photos.html"
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset=queryset)
+        if post.user.pk != self.request.user.pk:
+            raise Http404()
+        return post
+
+
+class EditPhotoView(UpdateView):
+
+    model = noti_model.Photo
+    template_name = "notifications/photo_edit.html"
+    fields = ("caption",)
+    pk_url_kwarg = "photo_pk"
