@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container w-75 mx-auto pt-5">
-        <div class="w-75 mx-auto"><a href=""><span class="call_to-btn w-100 text-center">Add Photo</span></a></div>
+        <div class="w-75 mx-auto"><a href="{% url 'notifications:create-photo' posting.pk %}"><span class="call_to-btn w-100 text-center">Add Photo</span></a></div>
         {% for photo in posting.photos.all %}
             <div class="row client_container my-5">
                 <img src="{{photo.file.url}}" class="takasa3 nagasa3 border border-dark rounded">

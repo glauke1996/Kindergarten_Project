@@ -1,11 +1,12 @@
 from django.db.models import fields
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, FormView
 from django.http import Http404
 from django.core.paginator import Paginator
 from . import models as noti_model
 from reviews import forms
+from notifications import forms as noti_forms
 
 # Create your views here.
 
@@ -71,3 +72,13 @@ class EditPhotoView(UpdateView):
     template_name = "notifications/photo_edit.html"
     fields = ("caption",)
     pk_url_kwarg = "photo_pk"
+
+
+class AddPhotoView(FormView):
+    model = noti_model.Photo
+    template_name = "notifications/photo_create.html"
+    fields = (
+        "caption",
+        "file",
+    )
+    form_class = noti_forms.CreatePhotoForm
