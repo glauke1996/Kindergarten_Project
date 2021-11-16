@@ -13,9 +13,19 @@ urlpatterns = [
         name="edit-photo",
     ),
     path(
+        "<int:post_pk>/photos/<int:photo_pk>/delete/",
+        views.delete_photo,
+        name="delete-photo",
+    ),
+    path(
         "<int:pk>/photos/create/",
         views.AddPhotoView.as_view(),
         name="create-photo",
+    ),
+    path(
+        "post/create/",
+        views.UploadPostView.as_view(),
+        name="create-post",
     ),
     path("search/", views.search, name="search"),
 ]

@@ -26,8 +26,8 @@ class Posting(AbstractTimeStampedModel):
 
 
 class Photo(AbstractTimeStampedModel):
-    caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="post_photos")
+    caption = models.CharField(max_length=80)
     post = models.ForeignKey("Posting", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):

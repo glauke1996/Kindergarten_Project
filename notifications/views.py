@@ -1,9 +1,12 @@
 from django.db.models import fields
+from django.forms.forms import Form
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, FormView
 from django.http import Http404
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from . import models as noti_model
 from reviews import forms
 from notifications import forms as noti_forms
@@ -73,12 +76,36 @@ class EditPhotoView(UpdateView):
     fields = ("caption",)
     pk_url_kwarg = "photo_pk"
 
+    def get_success_url(self):
+        post_pk = self.kwargs.get("post_pk")
+        return reverse("notifications:photos", kwargs={"pk": post_pk})
+
 
 class AddPhotoView(FormView):
-    model = noti_model.Photo
     template_name = "notifications/photo_create.html"
-    fields = (
-        "caption",
-        "file",
-    )
     form_class = noti_forms.CreatePhotoForm
+
+    def form_valid(self, form):
+        pk = self.kwargs.get("pk")
+        form.save(pk)
+        return redirect(reverse("notifications:photos", kwargs={"pk": pk}))
+
+
+class UploadPostView(FormView):
+    template_name = "notifications/post_create.html"
+    form_class = noti_forms.CreatePostForm
+
+
+@login_required
+def delete_photo(request, post_pk, photo_pk):
+    user = request.user
+    try:
+        post = noti_model.Posting.objects.get(pk=post_pk)
+        if post.user != user:
+            messages.error(request, "You are not athorized")
+        else:
+            noti_model.Photo.objects.filter(pk=photo_pk).delete()
+            messages.success(request, "Photo Deleted")
+        return redirect(reverse("notifications:photos", kwargs={"pk": post_pk}))
+    except noti_model.Posting.DoesNotExist:
+        return redirect(reverse("core:home"))

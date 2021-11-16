@@ -6,11 +6,11 @@
         <div class="w-75 mx-auto"><a href="{% url 'notifications:create-photo' posting.pk %}"><span class="call_to-btn w-100 text-center">Add Photo</span></a></div>
         {% for photo in posting.photos.all %}
             <div class="row client_container my-5">
-                <img src="{{photo.file.url}}" class="takasa3 nagasa3 border border-dark rounded">
+                <img src="{{photo.file.url}}" class="takasa3 nagasa3 border border-dark rounded overflow-hidden">
                 <h3 class="col align-self-center text-center">{{photo.caption}}</h3>
                 <div class="col-md-2 align-self-center">
                     <div><a href="{% url 'notifications:edit-photo' posting.pk photo.pk %}"><span class="call_to-btn5 nagasa2 text-center my-3">edit</span></a></div>
-                    <div><a href=""><span class="call_to-btn4 nagasa2 text-center">delete</span></a></div>
+                    <div><a href="{% url 'notifications:delete-photo' posting.pk photo.pk %}"><span class="call_to-btn4 nagasa2 text-center">delete</span></a></div>
                 </div>
             </div>
         {% endfor %}
