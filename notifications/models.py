@@ -14,6 +14,7 @@ class Posting(AbstractTimeStampedModel):
     user = models.ForeignKey(
         "users.User", related_name="posting", on_delete=models.CASCADE
     )
+    notification = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("-created",)

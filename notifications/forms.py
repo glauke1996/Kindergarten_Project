@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from users import models as user_model
 
 
 class CreatePhotoForm(forms.ModelForm):
@@ -43,3 +44,11 @@ class CreatePostForm(forms.ModelForm):
                 attrs={"placeholder": "내용", "class": "w-100 rounded"}
             ),
         }
+
+    def save(self, pk, bool, *args, **kwargs):
+        post = super().save(commit=False)
+        user = user_model.User.objects.get(pk=pk)
+        post.user = user
+        if bool:
+            post.notification = True
+        post.save()

@@ -95,6 +95,16 @@ class UploadPostView(FormView):
     template_name = "notifications/post_create.html"
     form_class = noti_forms.CreatePostForm
 
+    def form_valid(self, form):
+        noti = self.request.POST.get("notificataion")
+        if noti == "on":
+            bool = True
+        else:
+            bool = False
+        pk = self.request.user.pk
+        form.save(pk, bool)
+        return redirect("/notifications/")
+
 
 @login_required
 def delete_photo(request, post_pk, photo_pk):

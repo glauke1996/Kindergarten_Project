@@ -12,7 +12,7 @@
                         <p class="pt-1 text-truncate">작성일 : {{post.created|date:"Y. m. j | P"}}</p>
                         {% if post.user == user %}
                             <a href="{% url 'notifications:photos' post.pk %}">
-                                <span class="modification-btn">사진 편집</span>
+                                <span class="modification-btn">사진 업로드</span>
                             </a>
                         {% endif %}
                     </div>

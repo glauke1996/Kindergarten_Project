@@ -10,6 +10,18 @@
                 <span class="text-center col-md-2">글쓴이</span><span class="col-md-2 text-center">작성일</span>
             </div>
             {% for posting in object_list  %}
+            {% if posting.notification %}
+            <div class="row justify-content-between bg-warning">
+                <div class="col-md-8">
+                    <a href="{% url 'notifications:detail' posting.pk %}" >
+                        <span class="text-truncate text-dark">{{posting.title}}</span> 
+                    </a>
+                </div>
+                <span class="col-md-2 text-black-50 text-truncate text-center">{{posting.user.username}}</span><span class="col-md-2 text-center text-truncate">{{posting.created|date:"P"}}</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% for posting in object_list  %}
             <div class="row justify-content-between">
                 <div class="col-md-8">
                     <a href="{% url 'notifications:detail' posting.pk %}" >
