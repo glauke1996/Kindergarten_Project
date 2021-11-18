@@ -22,7 +22,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="Detail-Container pt-4 col-md-12">
-                        <p class="lead">{{post.content}}</p>
+                        <p class="lead">{{post.content|safe}}</p>
                         {% for photo in post.photos.all %}
                             <div>
                                 <img class="nagasa3 takasa3" src="{{photo.file.url}}"/>
