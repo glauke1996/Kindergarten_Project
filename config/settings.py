@@ -48,6 +48,7 @@ PROJECT_APPS = [
 ]
 THIRDPARTY_APPS = [
     "django_seed",
+    "ckeditor",
 ]
 
 INSTALLED_APPS = DJANGO_APP + PROJECT_APPS + THIRDPARTY_APPS

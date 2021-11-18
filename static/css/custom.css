@@ -108,6 +108,9 @@
 .takasa10{
     height: 60px;
 }
+.notification{
+    font-weight : 800;
+}
 .my-auto{
     margin-top:auto;
 }

@@ -6,24 +6,27 @@
     <div class="List-Container mx-auto w-75">
         <div class="container mx-auto pb-4 w-100">
             <div class="row justify-content-between py-3 Custom-border-b mb-3">
-                <span class="col-md-8 text-center">제목</span>
+                <span class="col-md-1">말머리</span>
+                <span class="col-md-7 text-center">제목</span>
                 <span class="text-center col-md-2">글쓴이</span><span class="col-md-2 text-center">작성일</span>
             </div>
-            {% for posting in object_list  %}
-            {% if posting.notification %}
-            <div class="row justify-content-between bg-warning">
-                <div class="col-md-8">
-                    <a href="{% url 'notifications:detail' posting.pk %}" >
-                        <span class="text-truncate text-dark">{{posting.title}}</span> 
+            <!--notification-->
+            {% for notification in notifications  %}
+            <div class="row justify-content-between notification">
+                <span class="col-md-1">공지</span>
+                <div class="col-md-7">
+                    <a href="{% url 'notifications:detail' notification.pk %}" >
+                        <span class="text-truncate text-dark">{{notification.title}}</span> 
                     </a>
                 </div>
-                <span class="col-md-2 text-black-50 text-truncate text-center">{{posting.user.username}}</span><span class="col-md-2 text-center text-truncate">{{posting.created|date:"P"}}</span>
+                <span class="col-md-2 text-black-50 text-truncate text-center">{{notification.user.username}}</span><span class="col-md-2 text-center text-truncate">{{notification.created|date:"P"}}</span>
             </div>
-            {% endif %}
+            <!--normal post-->
             {% endfor %}
             {% for posting in object_list  %}
             <div class="row justify-content-between">
-                <div class="col-md-8">
+                <span class="col-md-1">일반</span>
+                <div class="col-md-7">
                     <a href="{% url 'notifications:detail' posting.pk %}" >
                         <span class="text-truncate text-dark">{{posting.title}}</span> 
                     </a>

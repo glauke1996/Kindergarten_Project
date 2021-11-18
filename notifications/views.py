@@ -16,15 +16,15 @@ from notifications import forms as noti_forms
 
 class BoardView(ListView):
     model = noti_model.Posting
-    paginate_by = 12
+    paginate_by = 14
     paginate_orphans = 5
     ordering = "-created"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     posts = noti_model.Posting.objects.all()
-    #     context["posts"] = posts
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        notifications = noti_model.Posting.objects.filter(notification=True)
+        context["notifications"] = notifications
+        return context
 
 
 def post_detail(request, pk):

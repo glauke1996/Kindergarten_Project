@@ -8,6 +8,7 @@ django = "==3.2.5"
 pillow = "*"
 django-seed = "*"
 psycopg2 = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 black = "*"
