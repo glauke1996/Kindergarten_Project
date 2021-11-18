@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.http import Http404
 from core.models import AbstractTimeStampedModel
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 # Create your models here.
@@ -9,7 +10,8 @@ from core.models import AbstractTimeStampedModel
 
 class Posting(AbstractTimeStampedModel):
     title = models.CharField(max_length=80)
-    content = models.TextField()
+    # content = models.TextField()
+    content = RichTextUploadingField(blank=True, null=True)
     # picture = models.ImageField(upload_to="pictures", null=True, blank=True)
     user = models.ForeignKey(
         "users.User", related_name="posting", on_delete=models.CASCADE

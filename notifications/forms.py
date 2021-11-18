@@ -1,6 +1,9 @@
 from django import forms
+from django.forms.widgets import Widget
 from . import models
 from users import models as user_model
+from ckeditor.widgets import CKEditorWidget
+from ckeditor.fields import RichTextFormField
 
 
 class CreatePhotoForm(forms.ModelForm):
@@ -26,24 +29,26 @@ class CreatePhotoForm(forms.ModelForm):
 
 
 class CreatePostForm(forms.ModelForm):
+    # content = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
         model = models.Posting
         fields = (
             "title",
             "content",
         )
-        labels = {
-            "title": "",
-            "content": "",
-        }
-        widgets = {
-            "title": forms.TextInput(
-                attrs={"placeholder": "제목", "class": "w-100 rounded"}
-            ),
-            "content": forms.Textarea(
-                attrs={"placeholder": "내용", "class": "w-100 rounded"}
-            ),
-        }
+        # labels = {
+        #     "title": "",
+        # "content": "",
+        # }
+        # widgets = {
+        #     "title": forms.TextInput(
+        #         attrs={"placeholder": "제목", "class": "w-100 rounded"}
+        #     ),
+        #     # "content": forms.Textarea(
+        #     #     attrs={"placeholder": "내용", "class": "w-100 rounded"}
+        #     # ),
+        # }
 
     def save(self, pk, bool, *args, **kwargs):
         post = super().save(commit=False)
