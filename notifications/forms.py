@@ -37,18 +37,18 @@ class CreatePostForm(forms.ModelForm):
             "title",
             "content",
         )
-        # labels = {
-        #     "title": "",
-        # "content": "",
-        # }
-        # widgets = {
-        #     "title": forms.TextInput(
-        #         attrs={"placeholder": "제목", "class": "w-100 rounded"}
-        #     ),
-        #     # "content": forms.Textarea(
-        #     #     attrs={"placeholder": "내용", "class": "w-100 rounded"}
-        #     # ),
-        # }
+        labels = {
+            "title": "",
+            "content": "",
+        }
+        widgets = {
+            "title": forms.TextInput(
+                attrs={"placeholder": "제목", "class": "w-100 rounded mb-3"}
+            ),
+            #     # "content": forms.Textarea(
+            #     #     attrs={"placeholder": "내용", "class": "w-100 rounded"}
+            #     # ),
+        }
 
     def save(self, pk, bool, *args, **kwargs):
         post = super().save(commit=False)

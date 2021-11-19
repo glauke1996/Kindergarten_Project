@@ -5,12 +5,12 @@ from django.views import View
 from django.views.generic import FormView
 from django.contrib.auth import authenticate, login, logout
 from . import forms
-from . import models
+from . import models, mixins
 
 # Create your views here.
 
 
-class LoginView(View):
+class LoginView(mixins.LoggedOutOnlyView, View):
     def get(self, request):
         form = forms.LoginForm()
         return render(request, "users/login.html", {"form": form})
@@ -26,7 +26,12 @@ class LoginView(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect(reverse("core:home"))
+                next_arg = self.request.GET.get("next")
+                print(next_arg)
+                if next_arg != None:
+                    return redirect(next_arg)
+                else:
+                    return redirect(reverse("core:home"))
         return render(request, "users/login.html", {"form": form})
 
 
@@ -35,7 +40,7 @@ def log_out(request):
     return redirect(reverse("core:home"))
 
 
-class SignUpView(FormView):
+class SignUpView(mixins.LoggedOutOnlyView, FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
     success_url = reverse_lazy("core:home")

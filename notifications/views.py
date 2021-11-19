@@ -10,6 +10,7 @@ from django.contrib import messages
 from . import models as noti_model
 from reviews import forms
 from notifications import forms as noti_forms
+from users import mixins
 
 # Create your views here.
 
@@ -27,6 +28,7 @@ class BoardView(ListView):
         return context
 
 
+@login_required
 def post_detail(request, pk):
     try:
         post = noti_model.Posting.objects.get(pk=pk)
@@ -91,7 +93,7 @@ class AddPhotoView(FormView):
         return redirect(reverse("notifications:photos", kwargs={"pk": pk}))
 
 
-class UploadPostView(FormView):
+class UploadPostView(mixins.LoggedInOnlyView, FormView):
     template_name = "notifications/post_create.html"
     form_class = noti_forms.CreatePostForm
 

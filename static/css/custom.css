@@ -3,6 +3,10 @@
     border-width: 0.01em;
 }
 
+.Form-Container{
+    width: 56rem;
+    padding:30px;
+}
 
 
 ._action{
@@ -101,6 +105,12 @@
 }
 .nagasa4{
     width: 100vh;
+}
+.takasa-reply{
+    height: 5rem;
+}
+.nagasa-reply{
+    width: 40vh;
 }
 .takasa-auto{
     min-height: auto;
@@ -253,4 +263,24 @@
 .link-2 a, .link-2 a:before {
     -webkit-transition: all 0.2s ease;
             transition: all 0.2s ease;
+}
+
+.js-reply{
+    display:none;
+}
+.js-btn{
+    color: black;
+    opacity: 1;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.js-btn:hover{
+    opacity: 0.7;
+}
+.showing {
+    display: flex;
+}
+
+.reply{
+    font-size:70px;
 }
