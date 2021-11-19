@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
+from ckeditor_uploader.views import upload
 
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
@@ -27,5 +29,9 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
 ]
 
+urlpatterns += [
+    path(r"^ckeditor/upload/", login_required(upload), name="ckeditor_upload"),
+    path(r"^ckeditor/", include("ckeditor_uploader.urls")),
+]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

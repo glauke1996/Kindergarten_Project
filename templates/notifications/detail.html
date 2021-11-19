@@ -10,11 +10,11 @@
                     <div class="my-auto col-md-9">
                         <h1 class="post-title">{{post.title}}</h1>
                         <p class="pt-1 text-truncate">작성일 : {{post.created|date:"Y. m. j | P"}}</p>
-                        {% if post.user == user %}
+                        <!--{% if post.user == user %}
                             <a href="{% url 'notifications:photos' post.pk %}">
                                 <span class="modification-btn">사진 업로드</span>
                             </a>
-                        {% endif %}
+                        {% endif %}-->
                     </div>
                     <div class="col-md-3">
                         {% include "mixins/user_avatar.html" with user=post.user %}
