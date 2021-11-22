@@ -8,6 +8,7 @@ function handleClick(event) {
 }
 
 function loadReply() {
+    console.log("hello");
     reply_btn.addEventListener("click", handleClick);
 }
 

@@ -112,6 +112,12 @@
 .nagasa-reply{
     width: 40vh;
 }
+.takasa-nested{
+    height:6rem;
+}
+.nagasa-nested{
+    width: 80vh;
+}
 .takasa-auto{
     min-height: auto;
 }
