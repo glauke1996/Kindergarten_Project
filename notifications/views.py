@@ -1,6 +1,6 @@
 from django.db.models import fields
 from django.forms.forms import Form
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, FormView
 from django.http import Http404
@@ -32,7 +32,17 @@ class BoardView(ListView):
 def post_detail(request, pk):
     try:
         post = noti_model.Posting.objects.get(pk=pk)
-        form = forms.CreateReviewForm()
+        form = forms.CreateCommentForm()
+        user_comment = None
+        if request.method == "POST":
+            print(request.POST)
+            comment_form = forms.CreateCommentForm(request.POST)
+            if comment_form.is_valid():
+                user_comment = comment_form.save(commit=False)
+                user_comment.post = post
+                user_comment.user = request.user
+                user_comment.save()
+                # return HttpResponseRedirect('/' + post.slug)
         return render(
             request, "notifications/detail.html", {"post": post, "form": form}
         )

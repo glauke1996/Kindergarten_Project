@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
 
-app_name = "reviews"
+app_name = "comments"
 
 urlpatterns = [
-    path("create/<int:pk>", views.create_review, name="create"),
+    path("create/<int:pk>", views.create_comment, name="create"),
 ]

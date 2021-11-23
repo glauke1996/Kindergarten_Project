@@ -24,7 +24,7 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("notifications/", include("notifications.urls", namespace="notifications")),
     path("users/", include("users.urls", namespace="users")),
-    path("reviews/", include("reviews.urls", namespace="reviews")),
+    path("reviews/", include("reviews.urls", namespace="comments")),
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
 ]

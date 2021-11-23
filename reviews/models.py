@@ -1,5 +1,6 @@
 from abc import abstractclassmethod
 from django.db import models
+from django.db.models.fields import CharField
 from core.models import AbstractTimeStampedModel
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -23,9 +24,12 @@ class Review(AbstractTimeStampedModel):
 
 
 class Comment(MPTTModel):
-    parent = TreeForeignKey("self", related_name="children", on_delete=models.CASCADE)
     post = models.ForeignKey(
         "notifications.Posting", related_name="comments", on_delete=models.CASCADE
+    )
+    content = models.TextField()
+    parent = TreeForeignKey(
+        "self", related_name="children", on_delete=models.CASCADE, null=True, blank=True
     )
     user = models.ForeignKey(
         "users.User", related_name="users", on_delete=models.CASCADE
@@ -33,7 +37,7 @@ class Comment(MPTTModel):
     publish = models.DateTimeField(auto_now_add=True)
 
     class MPTTMeta:
-        order_insertion_by = ("-publish",)
+        order_insertion_by = ("publish",)
 
     def __str__(self):
         return f"{self.user}'s comment"

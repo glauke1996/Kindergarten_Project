@@ -2,6 +2,12 @@
 
 <body>
 {% block content %}
+<style>
+ .children form{
+     margin-left: -48px;
+ }
+ }
+</style>
 <main class="bg-white">
     <div class="row">
         <div class="col-md-8 mx-auto mt-5">
@@ -34,9 +40,9 @@
             <!--Review sector-->
             <div class="container rounded-lg min-vh-100">
                 <div class="pt-2 pb-5">
-                    <h42>댓글    {{post.reviews.all.count}}개</h4>
+                    <h42>댓글    {{post.comments.all.count}}개</h4>
                     <!--Comment Form-->
-                    <form class="mx-auto my-5" action="{% url 'reviews:create' post.pk %}" method="POST">
+                    <form class="mx-auto my-5" method="POST">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-2 my-auto">
@@ -59,14 +65,53 @@
                         </div>
                     </form>
                 </div>
-                {% for review in post.reviews.all %}
-                    <div class="row my-5 border-bottom rounded" id="{{review.id}}">
-                        <!--comment user profile-->
-                        <div class="col-md-2">
-                            {% if review.user.avatar %}
+                {% load mptt_tags %}
+                <div>
+                    {% recursetree post.comments.all %}
+                    <div id="{{node.id}}"class="my-2 p-2" style="border: 1px solid grey">
+                        <div class="row">
+                        <div class="col-md-2 col-sm-1">
+                        {% if node.user.avatar %}
                                 <div>
                                     <div class="mx-auto takasa nagasa overflow-hidden">
-                                        <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{review.user.avatar.url}}"/>
+                                        <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{node.user.avatar.url}}"/>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <div class="mx-auto takasa nagasa overflow-hidden rounded-circle">
+                                        <img class="h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% if node.level > 1 and user != node.parent.user%}
+                        <span class="bg-warning">@{{node.parent.user.username}}</span>
+                        {% endif %}
+                        <div>{{node.content}}</div>
+                        <div>{{node.level}}</div>
+                        <div>commented by {{node.user.username}}</div>
+                        </hr>
+                        <button class="border-0" onclick="myFunction({{node.id}})">reply</button>
+                        </div>
+                    </div>
+                        {% if not node.is_leaf_node and node.level == 0 %}
+                        <div class="pl-2 pl-md-5">{{children}}</div>
+                        {% endif %}
+                        {% if node.level == 1 %}
+                        <div>{{children}}</div>
+                        {% endif %}
+
+                    {% endrecursetree %}
+                </div>
+                {% for comment in post.comments.all %}
+                    <div class="row my-5 border-bottom rounded" id="{{comment.id}}">
+                        <!--comment user profile-->
+                        <div class="col-md-2">
+                            {% if comment.user.avatar %}
+                                <div>
+                                    <div class="mx-auto takasa nagasa overflow-hidden">
+                                        <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{comment.user.avatar.url}}"/>
                                     </div>
                                 </div>
                             {% else %}
@@ -81,21 +126,21 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-auto">
-                                    <p class="font-weight-bold overflow-hidden">{{review.user.username}}</p>
+                                    <p class="font-weight-bold overflow-hidden">{{comment.user.username}}</p>
                                 </div>
                                 <div class="col-md-2">
                                     <p>{{post.created|date:"Y. m. j"}}</p>
                                 </div>
                                 <div class="col-md-2">
-                                    <button class="border-0" onclick="myFunction({{review.id}})">reply</button>
+                                    <button class="border-0" onclick="myFunction({{comment.id}})">reply</button>
                                 </div>
                             </div>
-                            <p class="pb-2 lead">{{review.review}}</p>
+                            <p class="pb-2 lead">{{comment.content}}</p>
                         </div>
                     </div>
                     <!--<div class="js-reply">
                         <div class="col-md-2 text-right align-self-center"><span class="reply text-black-50">┗</span></div>
-                        <form class="col-md-10" action="{% url 'reviews:create' post.pk %}" method="POST">
+                        <form class="col-md-10" action="{% url 'comments:create' post.pk %}" method="POST">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-2 my-auto">
@@ -130,14 +175,16 @@
             }
             var a=document.getElementById(id);
             a.insertAdjacentHTML('afterend',
-            '<div class="row">\
-            <div class="col-md-3"></div>\
-            <form id="newForm" method="POST" action="{% url 'reviews:create' post.pk %}" class="d-flex justify-content-center">\
-                {% csrf_token %}\
-                <input name="keyword" value="{{keyword}}" placeholder="" class="kagenoaru-box text-center takasa-nested nagasa-nested">\
-                <button class="call_to-btn2 text-black-50 ml-2 h-75 align-self-center">댓글</button>\
-            </form>\
-            </div>');
+            '<form id="newForm" class="form-insert py-2" method="post"> \
+                <div class="d-flex justify-content-between"><h2>Reply:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
+                <select name="parent" class="d-none" id="id_parentt"> \
+                <option value="' + id + '" selected="' + id + '"></option> \
+                </select> \
+                <label for="id_content">Content:</label> \
+                <textarea name="content" cols="40" rows="5" class="form-control" required id="id_content"></textarea> \
+                {% csrf_token %} \
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button> \
+              </form>');
             
         }
     </script>
