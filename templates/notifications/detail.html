@@ -68,9 +68,10 @@
                 {% load mptt_tags %}
                 <div>
                     {% recursetree post.comments.all %}
-                    <div id="{{node.id}}"class="my-2 p-2" style="border: 1px solid grey">
+                    <!--<div id="{{node.id}}"class="my-2 p-2 rounded shadow-lg" style="border: 1px solid grey">-->
+                    <div id="{{node.id}}"class="my-2 p-2 rounded shadow col-md-10 mx-auto col-sm-12" style="">
                         <div class="row">
-                        <div class="col-md-2 col-sm-1">
+                        <div class="col-md-2 col-sm-1 align-self-center">
                         {% if node.user.avatar %}
                                 <div>
                                     <div class="mx-auto takasa nagasa overflow-hidden">
@@ -85,105 +86,57 @@
                                 </div>
                             {% endif %}
                         </div>
-                        {% if node.level > 1 and user != node.parent.user%}
-                        <span class="bg-warning">@{{node.parent.user.username}}</span>
-                        {% endif %}
-                        <div>{{node.content}}</div>
-                        <div>{{node.level}}</div>
-                        <div>commented by {{node.user.username}}</div>
+                        <div class="col-md-10 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-auto font-weight-bold overflow-hidden">
+                                {{node.user.username}}
+                            </div>
+                            <div class="col-md-2">{{node.publish|date:"Y. m. j"}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="align-self-center">
+                                {% if node.level > 1 and node.user != node.parent.user%}
+                                <span class="bg-warning ml-md-3 ml-1 ">@{{node.parent.user.username}}</span>
+                                {% endif %}
+                            </div>
+                            <div class="p-md-3 p-1">{{node.content}}</div>
+                        </div>
+                        <div>{{node.id}}</div>
                         </hr>
                         <button class="border-0" onclick="myFunction({{node.id}})">reply</button>
+                        </div>
                         </div>
                     </div>
                         {% if not node.is_leaf_node and node.level == 0 %}
                         <div class="pl-2 pl-md-5">{{children}}</div>
-                        {% endif %}
-                        {% if node.level == 1 %}
+                        {% else %}
                         <div>{{children}}</div>
                         {% endif %}
 
                     {% endrecursetree %}
                 </div>
-                {% for comment in post.comments.all %}
-                    <div class="row my-5 border-bottom rounded" id="{{comment.id}}">
-                        <!--comment user profile-->
-                        <div class="col-md-2">
-                            {% if comment.user.avatar %}
-                                <div>
-                                    <div class="mx-auto takasa nagasa overflow-hidden">
-                                        <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{comment.user.avatar.url}}"/>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div>
-                                    <div class="mx-auto takasa nagasa overflow-hidden rounded-circle">
-                                        <img class="h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <!--comment letter box-->
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-md-auto">
-                                    <p class="font-weight-bold overflow-hidden">{{comment.user.username}}</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <p>{{post.created|date:"Y. m. j"}}</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="border-0" onclick="myFunction({{comment.id}})">reply</button>
-                                </div>
-                            </div>
-                            <p class="pb-2 lead">{{comment.content}}</p>
-                        </div>
-                    </div>
-                    <!--<div class="js-reply">
-                        <div class="col-md-2 text-right align-self-center"><span class="reply text-black-50">┗</span></div>
-                        <form class="col-md-10" action="{% url 'comments:create' post.pk %}" method="POST">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-md-2 my-auto">
-                                    {% if user.avatar %}
-                                        <div>
-                                            <div class="mx-auto takasa nagasa overflow-hidden">
-                                                <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{user.avatar.url}}"/>
-                                            </div>
-                                        </div>
-                                    {% else %}
-                                        <div>
-                                            <div class="mx-auto takasa nagasa overflow-hidden rounded-circle">
-                                                <img class="h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                <div class="col-md-8">{{form}}</div>
-                                <button class="call_to-btn h-25 d-flex my-auto"><span class="main-heading">댓글</span></button>
-                            </div>
-                        </form>
-                    </div>-->
-                    
-                {% endfor %}
             </div>
         </div>
     </div>
     <script>
+        function formExit() {
+            document.getElementById("newForm").remove();
+            }
         function myFunction(id){
             if(document.contains(document.getElementById("newForm"))){
                 document.getElementById("newForm").remove();
             }
             var a=document.getElementById(id);
             a.insertAdjacentHTML('afterend',
-            '<form id="newForm" class="form-insert py-2" method="post"> \
-                <div class="d-flex justify-content-between"><h2>Reply:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
+            '<form id="newForm" class="form-insert py-2 col-md-10 col-sm-12 mx-auto" method="post"> \
+                <div class="d-flex justify-content-between"><h2>코멘트:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Close</button></div></div> \
                 <select name="parent" class="d-none" id="id_parentt"> \
                 <option value="' + id + '" selected="' + id + '"></option> \
                 </select> \
-                <label for="id_content">Content:</label> \
+                <label for="id_content"></label> \
                 <textarea name="content" cols="40" rows="5" class="form-control" required id="id_content"></textarea> \
                 {% csrf_token %} \
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button> \
+                <button type="submit" class="btn btn-warning btn-lg btn-block">등록</button> \
               </form>');
             
         }

@@ -10,7 +10,13 @@ body {
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
+.text-blue-800{
+  color:rgb(112, 177, 250)
+}
 
+.comment-height{
+  min-height: 5rem;
+}
 
 
 

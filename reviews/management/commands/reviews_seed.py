@@ -20,8 +20,9 @@ class Command(BaseCommand):
         seeder = Seed.seeder()
         users = user_models.User.objects.all()
         posts = noti_model.Posting.objects.all()
+        parent = review_models.Comment.objects.all()
         seeder.add_entity(
-            review_models.Review,
+            review_models.Comment,
             number,
             {
                 "post": lambda x: random.choice(posts),

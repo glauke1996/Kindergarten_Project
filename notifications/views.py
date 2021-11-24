@@ -42,7 +42,10 @@ def post_detail(request, pk):
                 user_comment.post = post
                 user_comment.user = request.user
                 user_comment.save()
-                # return HttpResponseRedirect('/' + post.slug)
+                return HttpResponseRedirect(
+                    reverse("notifications:detail", kwargs={"pk": pk}),
+                    {"post": post, "form": form},
+                )  ## to prevent us from double submit
         return render(
             request, "notifications/detail.html", {"post": post, "form": form}
         )

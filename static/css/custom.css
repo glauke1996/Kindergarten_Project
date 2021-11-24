@@ -124,6 +124,9 @@
 .takasa10{
     height: 60px;
 }
+.takasa-login{
+    height:3rem;
+}
 .notification{
     font-weight : 800;
 }
