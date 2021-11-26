@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-4 col-sm-12 mx-auto mt-md-5 mt-sm-3 pt-md-5 pt-3 rounded" style="border:solid 1px grey">
+    {% if user.avatar %}
+        <div class="">
+            <div class="mx-auto takasa2 nagasa2 overflow-hidden">
+                <img class="rounded-circle h-100 w-100 d-flex justify-content-center border border-5 border-dark" src="{{user.avatar.url}}"/>
+            </div>
+        <div class="w-50 mx-auto mt-md-3 mt-1"><h4 class="text-center overflow-hidden">{{user.username}}</h4></div>
+        <div class="mt-md-3 mt-1 takasa2 w-100 p-md-2 p-1 overflow-hidden text-center" id="76">{{user.bio}}</div>
+        <div class="js-see-more mt-md-2 mt-1" id="77"><button type="button" class="bg-see-more"  onclick="myFunction({{76}})">더보기</button></div>
+        </div>
+    {% else %}
+        <div class="takasa7">
+            <div class="mx-auto takasa2 nagasa2 overflow-hidden rounded-circle">
+                <img class="h-100 w-100 d-flex justify-content-center" src="/media/avatars/user4.png"/>
+            </div>
+        <div class="w-50 mx-auto mt-md-3 mt-1"><h4 class="text-center">{{user.username}}</h4></div>
+        </div>
+    {% endif %}
+    <a class="border-top takasa2 pb-md-3 pb-1 w-100 align-content-end d-flex" href="{% url 'users:update' user.pk %}">
+        <button class="btn btn-lg call_to-btn2 text-black-50 font-weight-bold btn-block mt-md-3 mt-1">프로필 변경</button>
+    </a>
+</div>
+<!--<script>
+    function isOverflown(btn_id, bio_id) {
+        bio=document.getElementById(bio_id);
+        btn=document.getElementById(btn_id);
+        bool= bio.scrollHeight > bio.clientHeight || bio.scrollWidth > bio.clientWidth;
+        if (bool){
+            btn.classList.add("showing");
+        }
+    }
+    function myFunction(id){
+        a=document.getElementById(id);
+        a.classList.remove("takasa2")
+        a.classList.remove("overflow-hidden")
+        a.classList.add("takasa-auto");
+    }
+</script>-->
+{% endblock %}

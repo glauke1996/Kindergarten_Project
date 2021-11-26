@@ -19,7 +19,22 @@ body {
 }
 
 
-
+.test{
+  overflow: visible;
+}
+.bg-see-more{
+  background-color:  #ffffff;
+  background-color: rgba( 255, 255, 255, 0.5 );
+  border: 0;
+  outline: 0;
+}
+.bg-see-more:focus{
+  border: 0;
+  outline: 0;
+}
+.ml-10{
+  margin-left: 6rem;
+}
 .text-dark{
   color: black;
   opacity: 1;

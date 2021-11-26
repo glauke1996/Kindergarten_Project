@@ -37,7 +37,7 @@ class Comment(MPTTModel):
     publish = models.DateTimeField(auto_now_add=True)
 
     class MPTTMeta:
-        order_insertion_by = ("publish",)
+        order_insertion_by = ["publish"]
 
     def __str__(self):
         return f"{self.user}'s comment"

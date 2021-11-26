@@ -91,6 +91,9 @@
                 <div class="nav-item text-black-50">
                   <a class="nav-link call_to-btn2" href="{% url 'users:logout' %}"><span class="main-heading">로그아웃</span></a>
                 </div>
+                <div class="nav-item text-black-50">
+                  <a class="nav-link" href="{% url 'users:profile' user.pk %}"><span class="main-heading">프로필</span></a>
+                </div>
               {% else %}
                 <div class="nav-item text-black-50">
                   <a class="nav-link call_to-btn2" href="{% url 'users:login' %}"><span class="main-heading">로그인</span></a>
@@ -133,7 +136,7 @@
   </section>
   <!-- footer section -->
 
-  <!--<script type="text/javascript" src="{% static 'js/For-showing.js' %}"></script>-->
+  <script type="text/javascript" src="{% static 'js/For-showing.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 

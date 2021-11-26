@@ -11,6 +11,7 @@ from . import models as noti_model
 from reviews import forms
 from notifications import forms as noti_forms
 from users import mixins
+from users import models as user_model
 
 # Create your views here.
 

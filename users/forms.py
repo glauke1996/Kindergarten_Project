@@ -6,15 +6,16 @@ from . import models
 
 class LoginForm(forms.Form):
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={"class": "w-100 takasa-login"})
+        widget=forms.EmailInput(attrs={"class": "w-100 takasa-login rounded"})
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"class": "w-100 takasa-login"})
+        widget=forms.PasswordInput(attrs={"class": "w-100 takasa-login rounded"})
     )
 
-    # def __init__(self):
-    #     self.fields['email'].label=''
-    #     self.fields['password'].label=''
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].label = "이메일"
+        self.fields["password"].label = "패스워드"
 
     def clean(self):
         email = self.cleaned_data.get("email")
@@ -31,12 +32,33 @@ class LoginForm(forms.Form):
 
 class SignUpForm(forms.Form):
 
-    username = forms.CharField(max_length=80, label="닉네임")
-    first_name = forms.CharField(max_length=80, label="이름")
-    last_name = forms.CharField(max_length=80, label="성")
-    email = forms.EmailField(label="이메일")
-    password = forms.CharField(widget=forms.PasswordInput, label="패스워드")
-    password1 = forms.CharField(widget=forms.PasswordInput, label="패스워드 확인")
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "w-100 takasa-login rounded"}),
+        max_length=80,
+        label="닉네임",
+    )
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "w-100 takasa-login rounded"}),
+        max_length=80,
+        label="이름",
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={"class": "w-100 takasa-login rounded"}),
+        max_length=80,
+        label="성",
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"class": "w-100 takasa-login rounded"}),
+        label="이메일",
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "w-100 takasa-login rounded"}),
+        label="패스워드",
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"class": "w-100 takasa-login rounded"}),
+        label="패스워드 확인",
+    )
 
     def clean_username(self):
         username = self.cleaned_data.get("username")

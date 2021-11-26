@@ -1,8 +1,9 @@
+from django.http.response import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.urls.base import reverse_lazy
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from django.contrib.auth import authenticate, login, logout
 from . import forms
 from . import models, mixins
@@ -56,3 +57,28 @@ class SignUpView(mixins.LoggedOutOnlyView, FormView):
             login(self.request, user)
             return redirect(reverse("core:home"))
         return super().form_valid(form)
+
+
+def ProfileView(request, pk):
+    try:
+        user = models.User.objects.get(pk=pk)
+        if request.method == "GET":
+            return render(request, "users/profile.html", {"user": user})
+    except models.User.DoesNotExist:
+        raise Http404
+
+
+class UpdateProfileView(mixins.LoggedInOnlyView, UpdateView):
+    model = models.User
+    template_name = "users/profile-update.html"
+    fields = (
+        "first_name",
+        "last_name",
+        "avatar",
+        "gender",
+        "bio",
+        "birth",
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user

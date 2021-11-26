@@ -1,19 +1,26 @@
-const reply_comment_box = document.querySelector(".js-reply");
-const reply_btn = document.querySelector(".js-btn");
-const SHOWING = "showing";
+const btn = document.getElementById("77");
+const bio = document.getElementById("76");
 
+
+function isOverflown() {
+    bool = bio.scrollHeight > bio.clientHeight || bio.scrollWidth > bio.clientWidth;
+    if (bool) {
+        btn.classList.add("showing");
+    }
+}
 
 function handleClick(event) {
-    reply_comment_box.classList.add(SHOWING);
+    bio.classList.remove("takasa2");
+    bio.classList.remove("overflow-hidden");
+    bio.classList.add("takasa-auto");
 }
 
-function loadReply() {
-    console.log("hello");
-    reply_btn.addEventListener("click", handleClick);
+function loadFunction() {
+    isOverflown();
+    btn.addEventListener("click", handleClick);
 }
-
 function init() {
-    loadReply();
+    loadFunction();
 }
 
 init();
