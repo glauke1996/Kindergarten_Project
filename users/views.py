@@ -68,17 +68,27 @@ def ProfileView(request, pk):
         raise Http404
 
 
-class UpdateProfileView(mixins.LoggedInOnlyView, UpdateView):
-    model = models.User
-    template_name = "users/profile-update.html"
-    fields = (
-        "first_name",
-        "last_name",
-        "avatar",
-        "gender",
-        "bio",
-        "birth",
-    )
-
+class UpdateProfileView(UpdateView):
+    model=models.User
+    template_name="users/profile-update.html"
+    fields=("first_name","last_name","avatar","gender","birth","bio")
+    pk_url_kwarg="user_pk"
+    
     def get_object(self, queryset=None):
         return self.request.user
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
+        form.fields["first_name"].widget.attrs = {"class":"w-100 takasa-login rounded"}
+        form.fields["last_name"].widget.attrs = {"class":"w-100 takasa-login rounded"}
+        form.fields["avatar"].widget.attrs = {"class":""}
+        form.fields["bio"].widget.attrs = {"class":"w-100 takasa2"}
+        form.fields["gender"].widget.attrs = {"class":"w-100 takasa-login rounded"}
+        form.fields["birth"].widget.attrs = {"class":"w-100 takasa-login rounded","placeholder":"0000-00-00"}
+        form.fields["first_name"].label="이름"
+        form.fields["last_name"].label="성"
+        form.fields["avatar"].label=""
+        form.fields["gender"].label="성별"
+        form.fields["birth"].label="생년월일"
+        form.fields["bio"].label="자기소개"
+        return form

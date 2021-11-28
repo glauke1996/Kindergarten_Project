@@ -2,9 +2,9 @@
 
 
 {% block content %}
-<form method='POST'>
+<form method='POST' enctype="multipart/form-data" style="border:solid 1px grey" class="col-md-4 col-sm-12 mx-auto mt-md-5 mt-sm-3 pt-md-5 pt-3 rounded">
     {% csrf_token %}
     {{form.as_p}}
-    <button>변경</button>
+    <button class="mb-lg-3 mb-1 btn btn-lg call_to-btn2 text-black-50 font-weight-bold btn-block mt-md-3 mt-1">변경</button>
 </form>
 {% endblock%}
