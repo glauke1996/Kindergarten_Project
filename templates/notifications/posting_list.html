@@ -23,7 +23,7 @@
             </div>
             <!--normal post-->
             {% endfor %}
-            {% for posting in object_list  %}
+            {% for posting in normals  %}
             <div class="row justify-content-between">
                 <span class="col-md-1">일반</span>
                 <div class="col-md-7">
@@ -55,7 +55,7 @@
 
     <form method="GET" action="{% url 'notifications:search'%}" class="mx-auto w-25 d-flex justify-content-center mt-5">
         <input name="keyword" value="{{keyword}}" placeholder="키워드로 검색" class="kagenoaru-box text-center">
-        <button class="call_to-btn2 text-black-50 ml-2">검색</button>
+        <button class="call_to-btn2 col-2 text-black-50 ml-2">검색</button>
     </form>
 
 

@@ -25,7 +25,9 @@ class BoardView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         notifications = noti_model.Posting.objects.filter(notification=True)
+        normals=noti_model.Posting.objects.filter(notification=False)
         context["notifications"] = notifications
+        context["normals"]=normals
         return context
 
 
@@ -33,6 +35,7 @@ class BoardView(ListView):
 def post_detail(request, pk):
     try:
         post = noti_model.Posting.objects.get(pk=pk)
+        print(post.notification)
         form = forms.CreateCommentForm()
         user_comment = None
         if request.method == "POST":
