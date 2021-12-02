@@ -16,19 +16,17 @@ from users import models as user_model
 # Create your views here.
 
 
-class BoardView(ListView):
-    model = noti_model.Posting
-    paginate_by = 14
-    paginate_orphans = 5
-    ordering = "-created"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        notifications = noti_model.Posting.objects.filter(notification=True)
-        normals=noti_model.Posting.objects.filter(notification=False)
-        context["notifications"] = notifications
-        context["normals"]=normals
-        return context
+def BoardView(request):
+    page = request.GET.get("page", 1)
+    notifications = noti_model.Posting.objects.filter(notification=True)
+    normals = noti_model.Posting.objects.filter(notification=False)
+    paginator = Paginator(normals, 14, orphans=5)
+    normals = paginator.page(int(page))
+    return render(
+        request,
+        "notifications/posting_list.html",
+        {"normals": normals, "notifications": notifications},
+    )
 
 
 @login_required

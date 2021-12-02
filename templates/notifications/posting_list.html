@@ -23,15 +23,15 @@
             </div>
             <!--normal post-->
             {% endfor %}
-            {% for posting in normals  %}
+            {% for post in normals  %}
             <div class="row justify-content-between">
                 <span class="col-md-1">일반</span>
                 <div class="col-md-7">
-                    <a href="{% url 'notifications:detail' posting.pk %}" >
-                        <span class="text-truncate text-dark">{{posting.title}}</span> 
+                    <a href="{% url 'notifications:detail' post.pk %}" >
+                        <span class="text-truncate text-dark">{{post.title}}</span> 
                     </a>
                 </div>
-                <span class="col-md-2 text-black-50 text-truncate text-center">{{posting.user.username}}</span><span class="col-md-2 text-center text-truncate">{{posting.created|date:"P"}}</span>
+                <span class="col-md-2 text-black-50 text-truncate text-center">{{post.user.username}}</span><span class="col-md-2 text-center text-truncate">{{post.created|date:"P"}}</span>
             </div>
             {% endfor %}
         </div>
@@ -39,14 +39,14 @@
 
     <div class="text-center mt-5">
         <h5>
-        {% if page_obj.has_previous %}
-            <a href="?page={{page_obj.previous_page_number}}" class="call_to-btn2 text-black-50">Previous</a>
+        {% if normals.has_previous %}
+            <a href="?page={{normals.previous_page_number}}" class="call_to-btn2 text-black-50">Previous</a>
         {% endif %}
 
-        {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+        {{normals.number}} of {{normals.paginator.num_pages}}
 
-        {% if page_obj.has_next  %}
-            <a href="?page={{page_obj.next_page_number}}" class="call_to-btn2 text-black-50">Next</a>
+        {% if normals.has_next  %}
+            <a href="?page={{normals.next_page_number}}" class="call_to-btn2 text-black-50">Next</a>
         {% endif %}
 
 
